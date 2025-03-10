@@ -40,7 +40,7 @@ app.post("/api/signin", async (req: any, res: any) => {
 app.post("/api/txn/sign", async (req, res) => {
     const serializedTransaction = req.body.message;
     const tx = Transaction.from(Buffer.from(serializedTransaction));
-    const keyPair = Keypair.fromSecretKey(bs58.default.decode(process.env.PRIVATE_KEY));
+    const keyPair = Keypair.fromSecretKey(bs58.decode(process.env.PRIVATE_KEY));
 
     const { blockhash } = await connection.getLatestBlockhash();
     tx.recentBlockhash = blockhash;
